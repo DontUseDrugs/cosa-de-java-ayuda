@@ -1,0 +1,78 @@
+import java.util.Scanner;
+
+public class problema2 {
+    
+   static Scanner sc = new Scanner(System.in);
+   
+
+    //introducir usuario
+public int intro(String[] names, String[] contra, float [][] cali, float prom, int conta, int usuarios){
+    int opcion;
+
+    for(int i = 0; i < 5; i++){
+        System.out.println("Introduzca el nombre del estudiante #"+ (usuarios+1) );
+        names[i] = sc.next();
+        System.out.println("Introduzca la contraseña del estudiante");
+        contra[i] = sc.next();
+        System.out.println("Introduzca 5 calificaciones");
+        for(int j = 0; j < 5; j ++){
+            System.out.print("Introduce la nota "+ (j+1) +" -> ");
+            cali[i][j] = sc.nextFloat();
+        }
+        System.out.println("\n ¿desea introducir otro? Sí: 1 || No: 0");
+        opcion = sc.nextInt();
+        if(opcion == 0){
+            i = 6;
+        }
+        usuarios = usuarios + 1;
+    }
+    return usuarios;
+}//intro
+
+public void Verusuarios(String[] name, int usuarios){
+    System.out.print("\033[H\033[2J");  
+    System.out.flush(); 
+     System.out.println("Los usuarios actuales son");
+      for(int i = 0; i < usuarios; i++){
+           System.out.println("\t"+name[i]);
+        }
+        System.out.println("\t"+usuarios+" / 5");
+}//fin ver usuarios
+
+public void Vernotas(String[] name, int aux, int usuarios, int opcion, float prom, float[][] cali){
+    //elegir usuario
+    System.out.print("\033[H\033[2J");  
+    System.out.flush(); 
+
+    System.out.println("¿Que usuario desea ver las notas?");
+    for(int i = 0; i < usuarios; i++){
+        System.out.println("\t"+name[i]+" = "+ (aux+1));
+        aux++;
+     }
+
+     // mostrar calificaciones
+     opcion = sc.nextInt();
+
+    for (int i = opcion - 1; i < opcion; i++) { 
+        prom = 0;
+        for (int j = 0; j < 5; j++) {
+            
+            System.out.println("las notas de "+name[i]+ " -> " +cali[i][j]);
+            prom = prom + cali[i][j];
+        }
+        System.out.println(" ");
+        System.out.printf("El promedio final es: %.2f",prom/5);
+        System.out.println();
+    }
+}//fin ver las notas
+
+public void Contra(String[] contra){
+    System.out.print("\033[H\033[2J");  
+    System.out.flush();  
+
+    System.out.println("contraseña "+contra[1]);
+}//fin contraseñas
+
+}//fin clase
+
+  
