@@ -1,0 +1,73 @@
+import java.util.Scanner;
+
+public class principal {
+    
+    public static void main(String[] args) {
+        //se declara los objetos
+        variables var = new variables();
+        problema2 prom = new problema2();
+        Scanner sc = new Scanner(System.in);
+
+        while(var.auxiliar != 3){
+        System.out.println("¿Qué problema desea?");
+        var.opc = sc.nextInt();
+        switch (var.opc) {
+            case 1:
+                //Problema 1
+            break;
+            
+                
+            case 2:
+                //Problema 2
+                var.users = prom.intro(var.UserName, var.contraseña, var.notas, var.promedio, var.contador, var.users);
+
+
+                System.out.print("\033[H\033[2J");  
+                System.out.flush();
+
+                System.out.println("usuarios: " +var.users);
+
+            while(var.opc != 5){
+                System.out.println("¿Qué desea hacer?");
+                System.out.println("\t Ver nombre de los usuarios = 1");
+                System.out.println("\t Ver notas = 2");
+                System.out.println("\t Actualizar contraseña = 3");
+                System.out.println("\t Introducir nuevo usuario = 4");
+                var.opc = sc.nextInt();
+                switch(var.opc){
+                    case 1:            
+                    prom.Verusuarios(var.UserName, var.users);
+                    break;
+
+                    case 2:            
+                    prom.Vernotas(var.UserName, var.auxiliar, var.users, var.opc, var.promedio, var.notas);
+                    break;
+
+                    case 3:            
+                
+                    break;
+
+                    case 4:            
+                     
+                    break;
+                }
+             
+
+            }
+            
+            break;
+                
+                
+            case 3:
+                //salir
+                var.auxiliar = 3;
+            break;
+
+        }
+    }
+        
+
+
+       sc.close();
+    }
+}
