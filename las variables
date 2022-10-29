@@ -1,6 +1,6 @@
+//Christopher Jogg, Luis Sergent
 public class variables{
     int users = 0;
-    int contador;
     float[][] notas = new float[5][5];
     String[] contraseña = new String[5];
     String[] UserName = new String[5];
