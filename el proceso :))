@@ -1,50 +1,87 @@
+//Christopher Jogg, Luis Sergent
 import java.util.Scanner;
 
 public class problema2 {
     
    static Scanner sc = new Scanner(System.in);
-   
 
     //introducir usuario
-public int intro(String[] names, String[] contra, float [][] cali, float prom, int conta, int usuarios){
+public int intro(String[] names, String[] contra, float [][] cali, float prom, int usuarios){
     int opcion;
-
-    for(int i = 0; i < 5; i++){
+    try {
+    for(int i = usuarios; i < 5; i++){
+        //introduce el nombre
         System.out.println("Introduzca el nombre del estudiante #"+ (usuarios+1) );
         names[i] = sc.next();
+        //introduce la contraseña
         System.out.println("Introduzca la contraseña del estudiante");
         contra[i] = sc.next();
+        //introduce las 5 notas
         System.out.println("Introduzca 5 calificaciones");
         for(int j = 0; j < 5; j ++){
             System.out.print("Introduce la nota "+ (j+1) +" -> ");
             cali[i][j] = sc.nextFloat();
         }
-        System.out.println("\n ¿desea introducir otro? Sí: 1 || No: 0");
-        opcion = sc.nextInt();
-        if(opcion == 0){
-            i = 6;
+        //Si llega a los 5 espacios del arreglo
+        if(i == 4){
+            System.out.println("se llego al limite de estudiantes");
         }
+
+        else{
+            do{
+                    //Seguir agregando o salir
+                System.out.println("\n ¿desea introducir otro? Sí: 1 || No: 0");
+                opcion = sc.nextInt();
+                if(opcion == 0){
+                    i = 6;
+                    break;
+                }
+
+                else if (opcion == 1){
+                    break;
+                }
+
+                else{
+                    System.out.println("Opción erronea");
+                }   
+            } while(opcion != 1);
+        }
+        
         usuarios = usuarios + 1;
     }
+    }catch(Exception e){
+        System.out.println("Error");
+    }
     return usuarios;
-}//intro
+}//Fin introducir usuarios
 
+//Ver los usuarios
 public void Verusuarios(String[] name, int usuarios){
+    try {
     System.out.print("\033[H\033[2J");  
     System.out.flush(); 
      System.out.println("Los usuarios actuales son");
+     //muestra todos los nombres
       for(int i = 0; i < usuarios; i++){
            System.out.println("\t"+name[i]);
         }
+        //la cantidad de usuarios sobre la cantidad máxima
         System.out.println("\t"+usuarios+" / 5");
+        System.out.println();
+    }catch(Exception e){
+        System.out.println("Error");
+    }
 }//fin ver usuarios
 
+//Ver notas y promedio
 public void Vernotas(String[] name, int aux, int usuarios, int opcion, float prom, float[][] cali){
+    try {
     //elegir usuario
     System.out.print("\033[H\033[2J");  
     System.out.flush(); 
 
     System.out.println("¿Que usuario desea ver las notas?");
+    //Muestra los usuarios al que ver las notas
     for(int i = 0; i < usuarios; i++){
         System.out.println("\t"+name[i]+" = "+ (aux+1));
         aux++;
@@ -52,7 +89,7 @@ public void Vernotas(String[] name, int aux, int usuarios, int opcion, float pro
 
      // mostrar calificaciones
      opcion = sc.nextInt();
-
+if(opcion < usuarios+1 && opcion > 0){
     for (int i = opcion - 1; i < opcion; i++) { 
         prom = 0;
         for (int j = 0; j < 5; j++) {
@@ -64,13 +101,49 @@ public void Vernotas(String[] name, int aux, int usuarios, int opcion, float pro
         System.out.printf("El promedio final es: %.2f",prom/5);
         System.out.println();
     }
+}
+else{
+    System.out.println("Opcion invalida");
+}
+}catch(Exception e){
+    System.out.println("Error");
+}
 }//fin ver las notas
 
-public void Contra(String[] contra){
+//cambiar las contraseñas
+public void Contra(String[] contra, int opcion, int usuarios, String[] name, int aux){
+    try {
+    String comprobar;
     System.out.print("\033[H\033[2J");  
     System.out.flush();  
+        //muestra los usuarios al cual cambiar la contraseña
+    System.out.println("¿Que usuario desea cambiar la contraseña?");
+    for(int i = 0; i < usuarios; i++){
+        System.out.println("\t"+name[i]+" = "+ (aux+1));
+        aux++;
+     }
 
-    System.out.println("contraseña "+contra[1]);
+     opcion = sc.nextInt();
+     if(opcion < usuarios+1 && opcion > 0){
+        System.out.print("Ingresa la antigua contraseña del estudiante: ");
+        comprobar = sc.next();
+        //si la contraseña es la misma
+        if (comprobar.equals(contra[opcion-1])) {
+            System.out.print("Ingresa la nueva contraseña del estudiante: ");
+            contra[opcion-1] = sc.next();
+            
+        }
+            //Si la contraseña es diferente
+        else {
+            System.out.println("Las contraseñas no coinciden.");
+        }
+    }
+    else{
+        System.out.println("Opcion invalida");
+    }
+    }catch(Exception e){
+        System.out.println("Error");
+    }
 }//fin contraseñas
 
 }//fin clase
