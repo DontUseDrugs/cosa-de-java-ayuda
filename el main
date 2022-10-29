@@ -1,15 +1,27 @@
+//Christopher Jogg, Luis Sergent
 import java.util.Scanner;
 
 public class principal {
     
     public static void main(String[] args) {
+        //Limpiar pantalla
+        System.out.print("\033[H\033[2J");  
+        System.out.flush();
+
         //se declara los objetos
         variables var = new variables();
         problema2 prom = new problema2();
         Scanner sc = new Scanner(System.in);
 
+        //Elegir los problemas
+try{
         while(var.auxiliar != 3){
         System.out.println("¿Qué problema desea?");
+        System.out.println("1) Problema 1");
+        System.out.println("2) Problema 2");
+        System.out.println("3) Salir");
+
+        //Procedimiento segun elección
         var.opc = sc.nextInt();
         switch (var.opc) {
             case 1:
@@ -19,36 +31,57 @@ public class principal {
                 
             case 2:
                 //Problema 2
-                var.users = prom.intro(var.UserName, var.contraseña, var.notas, var.promedio, var.contador, var.users);
 
+                //Introducimos el o los primeros estudiantes en el sistema.
+                var.users = prom.intro(var.UserName, var.contraseña, var.notas, var.promedio, var.users);
 
+                //limpiar pantalla
                 System.out.print("\033[H\033[2J");  
                 System.out.flush();
 
-                System.out.println("usuarios: " +var.users);
-
+                //menu de opciones
             while(var.opc != 5){
                 System.out.println("¿Qué desea hacer?");
-                System.out.println("\t Ver nombre de los usuarios = 1");
-                System.out.println("\t Ver notas = 2");
-                System.out.println("\t Actualizar contraseña = 3");
-                System.out.println("\t Introducir nuevo usuario = 4");
+                System.out.println("1)\t Ver nombre de los usuarios");
+                System.out.println("2)\t Ver notas");
+                System.out.println("3)\t Actualizar contraseña");
+                System.out.println("4)\t Introducir nuevo usuario");
+                System.out.println("5)\t Salir");
                 var.opc = sc.nextInt();
                 switch(var.opc){
-                    case 1:            
+                    case 1:
+                    //ver los nombres de los usuarios            
                     prom.Verusuarios(var.UserName, var.users);
                     break;
 
-                    case 2:            
+                    case 2:     
+                    //ver las notas y el promedio       
                     prom.Vernotas(var.UserName, var.auxiliar, var.users, var.opc, var.promedio, var.notas);
                     break;
 
-                    case 3:            
-                
+                    case 3:     
+                    //Cambiar la contraseña del usuario       
+                    prom.Contra(var.contraseña, var.opc, var.users, var.UserName, var.auxiliar);
                     break;
 
                     case 4:            
-                     
+                    //Agregar otros usuarios al sistema
+                    var.users = prom.intro(var.UserName, var.contraseña, var.notas, var.promedio, var.users);
+                    break;
+
+                    case 5:
+                    //salir
+                    System.out.print("\033[H\033[2J");  
+                    System.out.flush();
+
+                    System.out.println("Ha salido del problema 2");
+                    break; 
+
+                    default:
+                    System.out.print("\033[H\033[2J");  
+                    System.out.flush();
+
+                    System.out.println("Eleccion no valida, elegir otra");
                     break;
                 }
              
@@ -63,9 +96,17 @@ public class principal {
                 var.auxiliar = 3;
             break;
 
+            default:
+            System.out.print("\033[H\033[2J");  
+            System.out.flush();
+            System.out.println("Opcion no válida, elegir otra");
+            break;
+
         }
     }
-        
+}catch(Exception e){
+    System.out.println("Error");
+}
 
 
        sc.close();
